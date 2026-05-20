@@ -1,0 +1,300 @@
+<!-- Section additionnelle à intégrer dans la page principale -->
+<section id="morphology" class="morphology-section">
+    <div class="container">
+        <h2 class="section-title">Morphologie des Orthoptères</h2>
+        <div class="morphology-content">
+            <div class="morphology-grid">
+                <div class="morphology-card">
+                    <div class="morphology-icon">🦗</div>
+                    <h3>Tête</h3>
+                    <p>Hypognathe avec appareil buccal broyeur. Antennes filiformes ou ensiformes. Yeux composés bien développés.</p>
+                </div>
+                <div class="morphology-card">
+                    <div class="morphology-icon">🎵</div>
+                    <h3>Thorax</h3>
+                    <p>Pronotum bien développé. Pattes postérieures adaptées au saut. Organes stridulatoires présents.</p>
+                </div>
+                <div class="morphology-card">
+                    <div class="morphology-icon">🪶</div>
+                    <h3>Ailes</h3>
+                    <p>Deux paires d'ailes : élytres (tegmina) et ailes membraneuses. Dimorphisme sexuel fréquent.</p>
+                </div>
+                <div class="morphology-card">
+                    <div class="morphology-icon">🔊</div>
+                    <h3>Stridulation</h3>
+                    <p>Production de sons par frottement des élytres ou des pattes contre les ailes. Communication intraspécifique.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="ecology" class="ecology-section">
+    <div class="container">
+        <h2 class="section-title">Écologie et Habitat</h2>
+        <div class="ecology-content">
+            <div class="habitat-types">
+                <div class="habitat-card grassland">
+                    <h3>Prairies et Pelouses</h3>
+                    <p>Habitat privilégié pour de nombreuses espèces. Végétation herbacée diversifiée offrant nourriture et abri.</p>
+                    <ul>
+                        <li>Locusta migratoria</li>
+                        <li>Oedaleus decorus</li>
+                        <li>Dociostaurus marrocanus</li>
+                    </ul>
+                </div>
+                <div class="habitat-card arid">
+                    <h3>Zones Arides</h3>
+                    <p>Adaptations spécifiques aux conditions sèches. Coloration cryptique et comportement thermorégulateur.</p>
+                    <ul>
+                        <li>Oedaleus senegalensis</li>
+                        <li>Calliptamus barbarus</li>
+                        <li>Dociostaurus jogei</li>
+                    </ul>
+                </div>
+                <div class="habitat-card rocky">
+                    <h3>Milieux Rocheux</h3>
+                    <p>Espèces adaptées aux substrats durs. Camouflage efficace et capacités d'escalade développées.</p>
+                    <ul>
+                        <li>Calliptamus wattenwylianus</li>
+                        <li>Calliptamus barbarus</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="identification-key" class="identification-section">
+    <div class="container">
+        <h2 class="section-title">Clé d'Identification Simplifiée</h2>
+        <div class="identification-tree">
+            <div class="key-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Taille de l'insecte</h3>
+                    <div class="choices">
+                        <div class="choice" data-next="2a">
+                            <strong>Grande taille (>30mm)</strong>
+                            <p>Locusta migratoria</p>
+                        </div>
+                        <div class="choice" data-next="2b">
+                            <strong>Taille moyenne à petite (<30mm)</strong>
+                            <p>Continuer à l'étape 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-step" id="2b">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Couleur des ailes postérieures</h3>
+                    <div class="choices">
+                        <div class="choice" data-next="3a">
+                            <strong>Ailes postérieures colorées (rouge/jaune)</strong>
+                            <p>Continuer à l'étape 3</p>
+                        </div>
+                        <div class="choice" data-next="3b">
+                            <strong>Ailes postérieures non colorées</strong>
+                            <p>Genre Dociostaurus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-step" id="3a">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Couleur des ailes postérieures</h3>
+                    <div class="choices">
+                        <div class="choice">
+                            <strong>Ailes rouges à la base</strong>
+                            <p>Calliptamus barbarus</p>
+                        </div>
+                        <div class="choice">
+                            <strong>Ailes jaunes</strong>
+                            <p>Oedaleus decorus ou O. senegalensis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-step" id="3b">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Taille et coloration</h3>
+                    <div class="choices">
+                        <div class="choice">
+                            <strong>17-33mm, croix jaunâtre marquée</strong>
+                            <p>Dociostaurus marrocanus</p>
+                        </div>
+                        <div class="choice">
+                            <strong>Plus petit, brun clair</strong>
+                            <p>Dociostaurus jogei</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Styles pour les sections additionnelles */
+.morphology-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8faf9 0%, #e8f5e8 100%);
+}
+
+.morphology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.morphology-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.morphology-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.morphology-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.ecology-section {
+    padding: 4rem 0;
+    background: var(--white);
+}
+
+.habitat-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.habitat-card {
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.habitat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.habitat-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.habitat-card.grassland {
+    background: linear-gradient(135deg, #4a7c59 0%, #7fb069 100%);
+}
+
+.habitat-card.arid {
+    background: linear-gradient(135deg, #d4a574 0%, #e6c79a 100%);
+    color: var(--text-color);
+}
+
+.habitat-card.rocky {
+    background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+}
+
+.identification-section {
+    padding: 4rem 0;
+    background: var(--background-color);
+}
+
+.identification-tree {
+    margin-top: 2rem;
+}
+
+.key-step {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.choice {
+    background: var(--background-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    border-left: 4px solid var(--accent-color);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.choice:hover {
+    background: var(--accent-color);
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    .morphology-grid,
+    .habitat-types {
+        grid-template-columns: 1fr;
+    }
+    
+    .key-step {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .choices {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+

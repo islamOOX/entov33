@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phlaeothripidae - Famille des Phléothripidés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #4a7c59;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            margin: 20px auto;
+            max-width: 1600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            color: #4a7c59;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            color: #2d5016;
+        }
+
+        .content-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .family-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .family-info h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4a7c59;
+            padding-bottom: 15px;
+        }
+
+        .family-info .description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .species-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .species-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.05) 0%, rgba(45, 80, 22, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .species-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: #4a7c59;
+        }
+
+        .species-card:hover::before {
+            opacity: 1;
+        }
+
+        .species-card h3 {
+            color: #2d5016;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-card .scientific-name {
+            font-style: italic;
+            color: #4a7c59;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-info .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .species-info .info-row .icon {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .species-info .info-row .label {
+            font-weight: 600;
+            color: #2d5016;
+            margin-right: 8px;
+        }
+
+        .species-info .info-row .value {
+            color: #666;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .modal-header .scientific-name {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-section h3 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 8px;
+        }
+
+        .modal-section .characteristics-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-section .characteristics-list li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-section .characteristics-list li::before {
+            content: "🔸";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .basic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .basic-info-item {
+            background: rgba(74, 124, 89, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .basic-info-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .basic-info-item .label {
+            font-weight: 600;
+            color: #2d5016;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .basic-info-item .value {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            .species-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Phlaeothripidae</h1>
+        <p class="subtitle">Famille des Phléothripidés</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Thysanoptères</a> > <a href="tubulifera.html">Tubulifera</a> > <strong>Phlaeothripidae</strong>
+    </div>
+
+    <div class="content-container">
+        <div class="family-info">
+            <h2>🔬 Famille Phlaeothripidae</h2>
+            <div class="description">
+                La famille des Phlaeothripidae est l'unique famille du sous-ordre Tubulifera, comprenant 450 genres et environ 3500 espèces. 
+                Cette famille présente une remarquable diversité écologique avec des espèces phytophages, prédatrices et mycophages. 
+                Les membres de cette famille se distinguent par l'absence de microtriches sur la surface des ailes antérieures et 
+                l'absence de veines longitudinales distinctes. Le dernier segment abdominal est tubulaire avec l'anus à l'apex.
+            </div>
+        </div>
+
+        <div class="species-grid">
+            <div class="species-card" onclick="openModal('liothrips')">
+                <h3>Thrips de l'olivier</h3>
+                <div class="scientific-name">Liothrips oleae</div>
+                <div class="species-info">
+                    <div class="info-row">
+                        <span class="icon">📏</span>
+                        <span class="label">Taille:</span>
+                        <span class="value">1.9-2.5 mm (♀), 1.4-1.8 mm (♂)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎨</span>
+                        <span class="label">Couleur:</span>
+                        <span class="value">Noir brillant</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🏠</span>
+                        <span class="label">Habitat:</span>
+                        <span class="value">Olivier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="liothrips-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thrips de l'olivier</h2>
+                <div class="scientific-name">Liothrips oleae (Costa, 1857)</div>
+                <span class="close" onclick="closeModal('liothrips')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="basic-info">
+                    <div class="basic-info-item">
+                        <div class="icon">📏</div>
+                        <div class="label">Taille</div>
+                        <div class="value">1.9-2.5 mm (♀), 1.4-1.8 mm (♂)</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">Couleur</div>
+                        <div class="value">Noir brillant</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🏠</div>
+                        <div class="label">Habitat</div>
+                        <div class="value">Olivier</div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔬 Morphologie</h3>
+                    <ul class="characteristics-list">
+                        <li>Adulte robuste et très mobile</li>
+                        <li>Antennes de 8 articles</li>
+                        <li>Ailes à bords parallèles, arrondies à leur extrémité</li>
+                        <li>Ailes portent de longues soies parallèles, sauf sur leur partie basale</li>
+                        <li>Abdomen long et fusiforme</li>
+                        <li>4 paires de soies courtes sur chaque segment abdominal</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔍 Critères d'identification</h3>
+                    <ul class="characteristics-list">
+                        <li>Coloration noir brillant caractéristique</li>
+                        <li>Taille relativement grande pour un thrips</li>
+                        <li>Forme fusiforme de l'abdomen</li>
+                        <li>Arrangement spécifique des soies abdominales</li>
+                        <li>Ailes avec des soies parallèles distinctives</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🌿 Habitat et écologie</h3>
+                    <ul class="characteristics-list">
+                        <li>Spécialisé exclusivement sur l'olivier (Olea europaea)</li>
+                        <li>Présent dans toute la région méditerranéenne</li>
+                        <li>Adultes très mobiles, se déplaçant rapidement sur les feuilles</li>
+                        <li>Activité principalement diurne</li>
+                        <li>Hivernage sous l'écorce ou dans les anfractuosités</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>⚠️ Importance économique</h3>
+                    <ul class="characteristics-list">
+                        <li>Ravageur important de l'olivier en région méditerranéenne</li>
+                        <li>Cause des décolorations argentées sur les feuilles</li>
+                        <li>Peut provoquer la chute prématurée des feuilles</li>
+                        <li>Impact sur la photosynthèse et la vigueur de l'arbre</li>
+                        <li>Surveillance nécessaire dans les oliveraies</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔄 Cycle de vie</h3>
+                    <ul class="characteristics-list">
+                        <li>Métamorphose incomplète typique des Tubulifera</li>
+                        <li>Pupes encapsulées dans un cocon</li>
+                        <li>Plusieurs générations par an selon le climat</li>
+                        <li>Reproduction sexuée avec dimorphisme sexuel marqué</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(speciesId) {
+            document.getElementById(speciesId + '-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(speciesId) {
+            document.getElementById(speciesId + '-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Fermer le modal avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orthoptères – Espèces Nuisibles | ENTOMASTER</title>
+    <meta name="description" content="7 espèces de orthoptères nuisibles aux cultures. Classification, morphologie, plantes hotes.">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script src="../search_index.js"></script>
+</head>
+<body>
+
+<header>
+  <nav class="navbar" role="navigation" aria-label="Navigation principale">
+    <div class="nav-brand">
+      <a href="../index.html"><span class="brand-name">ENTOMASTER</span><span class="brand-sub">Entomologie Agricole</span></a>
+    </div>
+    <div class="nav-search" role="search">
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="9" r="6"/><path d="m15 15 3 3"/>
+        </svg>
+        <input type="search" id="globalSearch" placeholder="Rechercher parmi 136 espèces..." autocomplete="off">
+      </div>
+      <div id="searchDropdown" class="search-dropdown" role="listbox" aria-live="polite"></div>
+    </div>
+    <ul class="nav-menu" id="navMenu" role="menubar">
+      <li><a href="../index.html">Accueil</a></li>
+      <li class="has-dropdown">
+        <a href="#">Par Ordre &#x25BE;</a>
+        <ul class="dropdown-menu"><li><a href="../coleopteres/index.html">🪲 Coléoptères</a></li>
+<li><a href="../lepidopteres/index.html">🦋 Lépidoptères</a></li>
+<li><a href="../dipteres/index.html">🪰 Diptères</a></li>
+<li><a href="../hemipteres/index.html">🐛 Hémiptères</a></li>
+<li><a href="../thysanopteres/index.html">🔬 Thysanoptères</a></li>
+<li><a href="../hymenopteres/index.html">🐝 Hyménoptères</a></li>
+<li><a href="../orthopteres/index.html"  aria-current=page>🦗 Orthoptères</a></li></ul>
+      </li>
+      <li><a href="../classification_par_culture.html">Par Culture</a></li>
+      <li><a href="../index.html#references">References</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<nav aria-label="Fil d'Ariane" class="breadcrumb-nav">
+  <ol class="breadcrumb">
+    <li><a href="../index.html">Accueil</a></li>
+    <li aria-current="page">Orthoptères</li>
+  </ol>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <p class="page-order-label">Ordre : <strong>Orthoptera</strong> (Latreille, 1793)</p>
+    <h1 class="page-title">🦗 Orthoptères</h1>
+    <p class="page-subtitle">7 espèces nuisibles — Criquets et sauterelles ravageurs</p>
+    <div class="taxo-pills"><span class="taxo-pill">Acrididae</span>
+<span class="taxo-pill">Tettigoniidae</span>
+<span class="taxo-pill">Gryllidae</span></div>
+  </div>
+
+  <div class="filter-bar" role="search">
+    <input type="search" id="spSearch" placeholder="Filtrer par nom, famille, plante hote..." aria-label="Filtrer les especes">
+    <select id="famFilter" aria-label="Filtrer par famille">
+      <option value="">Toutes les familles</option>
+      <option value="acrididae">Acrididae</option>
+<option value="tettigoniidae">Tettigoniidae</option>
+<option value="gryllidae">Gryllidae</option>
+    </select>
+    <span class="filter-count" id="filterCount"></span>
+  </div>
+
+  
+    <div class="model-block">
+        <h2>Morphologie générale — Modèle 3D interactif</h2>
+        <div class="model-viewer-wrap">
+            <model-viewer src="orthopteres-3d/orthoptere.glb" alt="Modèle 3D Orthoptères"
+                auto-rotate camera-controls shadow-intensity="1"
+                camera-orbit="45deg 75deg 2.5m" style="width:100%;height:100%" loading="lazy">
+            </model-viewer>
+        </div>
+        <p class="model-caption">&#x1F5B1;&#xFE0F; Glisser pour pivoter · Scroll pour zoomer</p>
+        <div class="model-note">
+            <strong>Orthoptera</strong> (Latreille, 1793) — Criquets, sauterelles et grillons. Causent des dégâts massifs par broutage. Les invasions de criquets (Locusta migratoria) sont parmi les catastrophes agricoles les plus dévastatrices. Métamorphose incomplète.
+            <br><small>Source : <a href="https://www.catalogueoflife.org" target="_blank" rel="noopener">Catalogue of Life 2024</a></small>
+        </div>
+    </div>
+
+  <main id="species-container" aria-label="Liste des orthoptères"></main>
+
+  <div class="no-results-msg" id="noResults">
+    <p>Aucune espèce ne correspond à votre filtre.</p>
+    <button class="reset-btn" id="resetBtn">Réinitialiser</button>
+  </div>
+
+  <aside class="page-refs">
+    <h3>&#x1F4DA; Sources – Orthoptères</h3>
+    <ul><li><strong>Uvarov B.P.</strong> (1977). <em>Grasshoppers and Locusts Vol. 2</em>. COPR London.</li>
+<li><strong>FAO</strong> (2020). <em>Desert Locust Bulletin</em>. FAO Rome.</li>
+<li><strong>EPPO</strong> (2024). <em>Pest datasheets – Orthoptera</em>. https://gd.eppo.int. gd.eppo.int</li></ul>
+  </aside>
+
+</div>
+
+<div id="speciesModal" class="species-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" aria-label="Fermer">&#x2715;</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="spTooltip" class="sp-tooltip" role="tooltip"></div>
+<button id="backToTop" aria-label="Haut de page">&#x25B2;</button>
+
+<script src="../shared.js"></script>
+<script src="order_script.js"></script>
+</body>
+</html>

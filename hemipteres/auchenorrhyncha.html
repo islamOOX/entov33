@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sous-ordre: Auchenorrhyncha</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div id="particles"></div>
+    
+    <header class="header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Hémiptères</a> > <span>Auchenorrhyncha</span>
+            </nav>
+            <h1 class="main-title">Sous-ordre: Auchenorrhyncha</h1>
+            <p class="subtitle">Cicadelles et apparentés - Classification scientifique et espèces</p>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+
+
+            <!-- Section caractères généraux -->
+            <section class="characteristics-section">
+                <h2 class="section-title">Caractères généraux</h2>
+                <div class="characteristics-content">
+                    <p>Insectes ptérygotes, possédant un appareil buccal de type piqueur-suceur, transformé en rostre court.</p>
+                    <ul class="characteristics-list">
+                        <li>4 ailes membraneuses identiques disposées en toit</li>
+                        <li>Antennes courtes</li>
+                        <li>Le labium inséré en avant des pattes antérieures</li>
+                        <li>Antennes de 1 à 3 articles surmontés d'une soie rigide ou fouet</li>
+                        <li>Ailes à nervation assez complètes avec des nervures transverses</li>
+                        <li>Tarses de 3 articles</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section espèces -->
+            <section class="species-section">
+                <h2 class="section-title">Espèces principales</h2>
+                <div id="species-container" class="species-container">
+                    <!-- Les espèces seront générées par JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tooltip pour les espèces -->
+    <div id="species-tooltip" class="species-tooltip">
+        <div class="tooltip-title"></div>
+        <div class="tooltip-content"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Classification des Hémiptères - Guide scientifique</p>
+        </div>
+    </footer>
+
+    <script src="species_data.js"></script>
+    <script src="script_auchenorrhyncha.js"></script>
+</body>
+</html>
+

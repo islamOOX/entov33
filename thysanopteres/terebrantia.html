@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terebrantia - Thysanoptères</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #4a7c59;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            margin: 20px auto;
+            max-width: 1600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            color: #4a7c59;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            color: #2d5016;
+        }
+
+        .content-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .suborder-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .suborder-info h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4a7c59;
+            padding-bottom: 15px;
+        }
+
+        .suborder-info .description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .characteristics {
+            background: rgba(74, 124, 89, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .characteristics h3 {
+            color: #2d5016;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .characteristics-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .characteristics-list li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .characteristics-list li::before {
+            content: "🔸";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .families-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .families-section h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #4a7c59;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .family-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #4a7c59;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .family-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.1) 0%, rgba(45, 80, 22, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .family-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            border-left-color: #2d5016;
+        }
+
+        .family-card:hover::before {
+            opacity: 1;
+        }
+
+        .family-card h3 {
+            color: #2d5016;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .family-card .scientific-name {
+            font-style: italic;
+            color: #4a7c59;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .family-card .description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
+        }
+
+        .species-count {
+            display: inline-block;
+            background: #4a7c59;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Terebrantia</h1>
+        <p class="subtitle">Sous-ordre des Térébrants</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Thysanoptères</a> > <strong>Terebrantia</strong>
+    </div>
+
+    <div class="content-container">
+        <div class="suborder-info">
+            <h2>🔬 Caractéristiques du sous-ordre Terebrantia</h2>
+            <div class="description">
+                Les Terebrantia constituent un sous-ordre de thysanoptères caractérisés par la présence d'un ovipositeur en forme de scie chez les femelles, 
+                utilisé pour insérer les œufs dans les tissus végétaux. Ce sous-ordre comprend la majorité des espèces phytophages de thrips, 
+                incluant de nombreux ravageurs agricoles importants.
+            </div>
+            
+            <div class="characteristics">
+                <h3>🔍 Caractéristiques morphologiques</h3>
+                <ul class="characteristics-list">
+                    <li>Ovipositeur denté en forme de tarière (4 gonapophyses) chez les femelles</li>
+                    <li>Ailes portées parallèlement sur le dos</li>
+                    <li>Ailes antérieures avec des rangées de soies formant des nervures</li>
+                    <li>Antennes de 6 à 9 segments</li>
+                    <li>Larves actives, pupes non encapsulées</li>
+                    <li>Présence d'ocelles chez les individus ailés</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="families-section">
+            <h2>Familles du sous-ordre Terebrantia</h2>
+            
+            <div class="family-card" onclick="navigateToFamily('thripidae')">
+                <h3>Thripidae <span class="species-count">4 espèces</span></h3>
+                <div class="scientific-name">Famille des Thripidés</div>
+                <div class="description">
+                    La famille des Thripidae est la plus importante du sous-ordre Terebrantia avec plus de 2000 espèces réparties en 276 genres. 
+                    Elle comprend de nombreuses espèces d'importance économique, notamment les thrips ravageurs des cultures légumières et ornementales.
+                </div>
+                <div class="characteristics">
+                    <h4>🔬 Caractéristiques principales</h4>
+                    <ul class="characteristics-list">
+                        <li>Ovipositeur courbé ventralement (vers le bas)</li>
+                        <li>Ailes pointues et assez étroites</li>
+                        <li>Antennes se terminant en style effilé</li>
+                        <li>Nervure principale des ailes avec des soies régulièrement espacées</li>
+                    </ul>
+                </div>
+                <button class="cta-button">Explorer les espèces →</button>
+            </div>
+
+            <div class="family-card">
+                <h3>Aeolothripidae <span class="species-count">0 espèce</span></h3>
+                <div class="scientific-name">Famille des Aéolothripidés</div>
+                <div class="description">
+                    La famille des Aeolothripidae comprend 23 genres et 190 espèces. Ces thrips se distinguent par leur ovipositeur courbé dorsalement 
+                    et leurs ailes plus larges et arrondies à l'apex. Beaucoup d'espèces sont prédatrices d'autres petits arthropodes.
+                </div>
+                <div class="characteristics">
+                    <h4>🔬 Caractéristiques principales</h4>
+                    <ul class="characteristics-list">
+                        <li>Ovipositeur courbé dorsalement (vers le haut)</li>
+                        <li>Ailes larges et arrondies à l'apex</li>
+                        <li>Souvent prédatrices d'autres arthropodes</li>
+                        <li>Coloration souvent plus vive</li>
+                    </ul>
+                </div>
+                <button class="cta-button" disabled style="opacity: 0.5;">Aucune espèce répertoriée</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateToFamily(family) {
+            if (family === 'thripidae') {
+                window.location.href = 'thripidae.html';
+            }
+        }
+    </script>
+</body>
+</html>
+

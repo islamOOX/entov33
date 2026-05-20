@@ -1,0 +1,83 @@
+{
+  "Terebrantia": {
+    "Thripidae": [
+      {
+        "name": "Frankliniella occidentalis",
+        "common_name": "Thrips californien",
+        "size": "1-1.4 mm",
+        "color": "rouge au jaune et au brun",
+        "habitat": "Arbres fruitiers, maraichage, plantes ornementales",
+        "characteristics": [
+          "Nervure principale des ailes antérieures avec des soies régulièrement espacées (14 à 19)",
+          "Bordure antérieure du prothorax avec une paire de soies plus longues",
+          "Antennes à 8 segments",
+          "Pronotum avec des soies antéro-angulaires bien développées",
+          "Ailes antérieures avec deux rangées complètes de soies",
+          "Mâles de couleur pâle",
+          "Ctenidium antéro-latéral sur le 5ème segment abdominal par rapport au stigmate",
+          "Soies réduites sur les 5ème et 6ème segments abdominaux"
+        ]
+      },
+      {
+        "name": "Thrips tabaci",
+        "common_name": "Thrips du tabac",
+        "size": "1-1.3 mm",
+        "color": "jaune pâle à brun foncé",
+        "habitat": "Cultures légumières (oignon, tomate)",
+        "characteristics": [
+          "Antennes à sept segments",
+          "Ailes bien développées, jaunes marron, frangées de longs poils",
+          "Thorax et partie médiane avec des taches brunâtres",
+          "Femelles avec un ovipositeur à l'extrémité de l'abdomen",
+          "Nymphes blanchâtres à vertes, environ 0.25 mm de long, avec des yeux rouges"
+        ]
+      },
+      {
+        "name": "Pezothrips kellyanus",
+        "common_name": "Thrips de Kelly",
+        "size": "1.6-1.8 mm (femelles), 1.2-1.6 mm (mâles)",
+        "color": "jaune pâle à brun foncé",
+        "habitat": "Agrumes",
+        "characteristics": [
+          "Ailes noircies avec deux zones claires à la base",
+          "Ailes antérieures avec une nervure principale ayant seulement deux setae dans la partie distale et aucune dans la partie centrale",
+          "Pattes foncées, sauf tarses et tibias des pattes antérieures jaunes",
+          "Antennes formées de huit segments foncés sauf zones de jonction des 3ème et 4ème articles transparentes",
+          "Mâles avec le 6ème article antennaire anormalement long (environ deux fois plus long que chez la femelle)",
+          "Mâles avec plus de 40 petites zones glandulaires dans les segments abdominaux"
+        ]
+      },
+      {
+        "name": "Scirtothrips sp.",
+        "common_name": "Scirtothrips",
+        "size": "1-1.4 mm",
+        "color": "rouge au jaune et au brun",
+        "habitat": "Rosacées fruitières, agrumes, cultures maraichères",
+        "characteristics": [
+          "Surface du pronotum couverte de nombreuses stries transversales rapprochées",
+          "Tergites abdominaux avec de nombreuses rangées parallèles de petites microtriches latéralement",
+          "Sternites avec des soies marginales atteignant le bord postérieur",
+          "Métanotum avec une paire médiane de soies sortant près de la bordure antérieure"
+        ]
+      }
+    ]
+  },
+  "Tubulifera": {
+    "Phlaeothripidae": [
+      {
+        "name": "Liothrips oleae",
+        "common_name": "Thrips de l'olivier",
+        "size": "1.9-2.5 mm (femelle), 1.4-1.8 mm (mâle)",
+        "color": "noir brillant",
+        "habitat": "Olivier",
+        "characteristics": [
+          "Adulte robuste et très mobile",
+          "Antennes de 8 articles",
+          "Ailes à bords parallèles, arrondies à leur extrémité, avec de longues soies parallèles (sauf partie basale)",
+          "Abdomen long et fusiforme avec 4 paires de soies courtes sur chaque segment"
+        ]
+      }
+    ]
+  }
+}
+

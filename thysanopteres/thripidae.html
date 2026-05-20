@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thripidae - Famille des Thripidés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2d5016;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #4a7c59;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 30px;
+            margin: 20px auto;
+            max-width: 1600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb a {
+            color: #4a7c59;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumb a:hover {
+            color: #2d5016;
+        }
+
+        .content-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .family-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .family-info h2 {
+            color: #2d5016;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #4a7c59;
+            padding-bottom: 15px;
+        }
+
+        .family-info .description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .species-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .species-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.05) 0%, rgba(45, 80, 22, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .species-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-color: #4a7c59;
+        }
+
+        .species-card:hover::before {
+            opacity: 1;
+        }
+
+        .species-card h3 {
+            color: #2d5016;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-card .scientific-name {
+            font-style: italic;
+            color: #4a7c59;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-card .species-image {
+            width: 100%;
+            height: 150px; /* Hauteur fixe pour les images */
+            object-fit: contain; /* Assure que l'image est entièrement visible */
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0; /* Fond clair pour les images */
+        }
+
+        .species-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .species-info .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .species-info .info-row .icon {
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .species-info .info-row .label {
+            font-weight: 600;
+            color: #2d5016;
+            margin-right: 8px;
+        }
+
+        .species-info .info-row .value {
+            color: #666;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .modal-header .scientific-name {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-section {
+            margin-bottom: 25px;
+        }
+
+        .modal-section h3 {
+            color: #2d5016;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 8px;
+        }
+
+        .modal-section .characteristics-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-section .characteristics-list li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-section .characteristics-list li::before {
+            content: "🔸";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .basic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .basic-info-item {
+            background: rgba(74, 124, 89, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .basic-info-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .basic-info-item .label {
+            font-weight: 600;
+            color: #2d5016;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .basic-info-item .value {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 15px;
+            }
+
+            .species-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Thripidae</h1>
+        <p class="subtitle">Famille des Thripidés</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Thysanoptères</a> > <a href="terebrantia.html">Terebrantia</a> > <strong>Thripidae</strong>
+    </div>
+
+    <div class="content-container">
+        <div class="family-info">
+            <h2>🔬 Famille Thripidae</h2>
+            <div class="description">
+                La famille des Thripidae est la plus importante du sous-ordre Terebrantia, comprenant 276 genres et plus de 2000 espèces. 
+                Cette famille inclut de nombreuses espèces d\"importance économique majeure, notamment des ravageurs des cultures légumières, 
+                fruitières et ornementales. Les thrips de cette famille sont caractérisés par leur ovipositeur courbé ventralement et leurs 
+                ailes pointues et étroites.
+            </div>
+        </div>
+
+        <div class="species-grid">
+            <div class="species-card" onclick="openModal('frankliniella')">
+                <img src="frankliniella_occidentalis.jpg" alt="Frankliniella occidentalis" class="species-image">
+                <h3>Thrips californien</h3>
+                <div class="scientific-name">Frankliniella occidentalis</div>
+                <div class="species-info">
+                    <div class="info-row">
+                        <span class="icon">📏</span>
+                        <span class="label">Taille:</span>
+                        <span class="value">1-1.4 mm</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎨</span>
+                        <span class="label">Couleur:</span>
+                        <span class="value">Rouge au jaune et au brun</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🏠</span>
+                        <span class="label">Habitat:</span>
+                        <span class="value">Arbres fruitiers, maraîchage, plantes ornementales</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="species-card" onclick="openModal('thrips_tabaci')">
+                <img src="thrips_tabaci.jpg" alt="Thrips tabaci" class="species-image">
+                <h3>Thrips du tabac</h3>
+                <div class="scientific-name">Thrips tabaci</div>
+                <div class="species-info">
+                    <div class="info-row">
+                        <span class="icon">📏</span>
+                        <span class="label">Taille:</span>
+                        <span class="value">1-1.3 mm</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎨</span>
+                        <span class="label">Couleur:</span>
+                        <span class="value">Jaune pâle à brun foncé</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🏠</span>
+                        <span class="label">Habitat:</span>
+                        <span class="value">Cultures légumières (oignon, tomate)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="species-card" onclick="openModal('pezothrips')">
+                <img src="pezothrips_kellyanus.jpg" alt="Pezothrips kellyanus" class="species-image">
+                <h3>Thrips de Kelly</h3>
+                <div class="scientific-name">Pezothrips kellyanus</div>
+                <div class="species-info">
+                    <div class="info-row">
+                        <span class="icon">📏</span>
+                        <span class="label">Taille:</span>
+                        <span class="value">1.6-1.8 mm (♀), 1.2-1.6 mm (♂)</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🎨</span>
+                        <span class="label">Couleur:</span>
+                        <span class="value">Jaune pâle à brun foncé</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="icon">🏠</span>
+                        <span class="label">Habitat:</span>
+                        <span class="value">Agrumes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="frankliniella-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thrips californien</h2>
+                <div class="scientific-name">Frankliniella occidentalis (Pergande, 1895)</div>
+                <span class="close" onclick="closeModal('frankliniella')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="frankliniella_occidentalis.jpg" alt="Frankliniella occidentalis" class="modal-image">
+                <div class="basic-info">
+                    <div class="basic-info-item">
+                        <div class="icon">📏</div>
+                        <div class="label">Taille</div>
+                        <div class="value">1-1.4 mm</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">Couleur</div>
+                        <div class="value">Rouge au jaune et au brun</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🏠</div>
+                        <div class="label">Habitat</div>
+                        <div class="value">Arbres fruitiers, maraîchage, plantes ornementales</div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔬 Morphologie</h3>
+                    <ul class="characteristics-list">
+                        <li>Nervure principale des ailes antérieures avec des soies régulièrement espacées (14 à 19)</li>
+                        <li>Bordure antérieure du prothorax avec une paire de soies plus longues</li>
+                        <li>Antennes à 8 segments</li>
+                        <li>Pronotum avec des soies antéro-angulaires bien développées</li>
+                        <li>Ailes antérieures avec deux rangées complètes de soies</li>
+                        <li>Mâles de couleur pâle</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔍 Critères d\'identification</h3>
+                    <ul class="characteristics-list">
+                        <li>Ctenidium antéro-latéral sur le 5ème segment abdominal par rapport au stigmate</li>
+                        <li>Soies réduites sur les 5ème et 6ème segments abdominaux</li>
+                        <li>Dimorphisme sexuel marqué avec mâles plus petits et plus pâles</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>⚠️ Importance économique</h3>
+                    <ul class="characteristics-list">
+                        <li>Ravageur majeur des cultures sous serre depuis les années 1980</li>
+                        <li>Vecteur du Tomato spotted wilt virus</li>
+                        <li>Dégâts sur concombre, poivron, melon, aubergine, chrysanthème, rosier</li>
+                        <li>Espèce invasive ayant supplanté d\'autres thrips en Europe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="thrips_tabaci-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thrips du tabac</h2>
+                <div class="scientific-name">Thrips tabaci (Lindemann, 1888)</div>
+                <span class="close" onclick="closeModal('thrips_tabaci')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="thrips_tabaci.jpg" alt="Thrips tabaci" class="modal-image">
+                <div class="basic-info">
+                    <div class="basic-info-item">
+                        <div class="icon">📏</div>
+                        <div class="label">Taille</div>
+                        <div class="value">1-1.3 mm</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">Couleur</div>
+                        <div class="value">Jaune pâle à brun foncé</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🏠</div>
+                        <div class="label">Habitat</div>
+                        <div class="value">Cultures légumières</div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔬 Morphologie</h3>
+                    <ul class="characteristics-list">
+                        <li>Antennes à sept segments</li>
+                        <li>Ailes bien développées, jaunes marron, frangées de longs poils</li>
+                        <li>Thorax et partie médiane présentent des taches brunâtres</li>
+                        <li>Femelles avec un ovipositeur à l\'extrémité de l\'abdomen</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔄 Métamorphose</h3>
+                    <ul class="characteristics-list">
+                        <li>Nymphes blanchâtres à vertes, environ 0.25 mm de long</li>
+                        <li>Nymphes avec des yeux rouges caractéristiques</li>
+                        <li>Reproduction souvent parthénogénétique (mâles très rares dans certaines populations)</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🌱 Habitat et dégâts</h3>
+                    <ul class="characteristics-list">
+                        <li>Spécialisé sur les cultures d\'oignon et de tomate</li>
+                        <li>Présent en Europe depuis de nombreuses années</li>
+                        <li>Vecteur du Tomato spotted wilt virus</li>
+                        <li>Cause des décolorations argentées sur les feuilles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pezothrips-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Thrips de Kelly</h2>
+                <div class="scientific-name">Pezothrips kellyanus (Bagnall, 1916)</div>
+                <span class="close" onclick="closeModal('pezothrips')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <img src="pezothrips_kellyanus.jpg" alt="Pezothrips kellyanus" class="modal-image">
+                <div class="basic-info">
+                    <div class="basic-info-item">
+                        <div class="icon">📏</div>
+                        <div class="label">Taille</div>
+                        <div class="value">1.6-1.8 mm (♀), 1.2-1.6 mm (♂)</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🎨</div>
+                        <div class="label">Couleur</div>
+                        <div class="value">Jaune pâle à brun foncé</div>
+                    </div>
+                    <div class="basic-info-item">
+                        <div class="icon">🏠</div>
+                        <div class="label">Habitat</div>
+                        <div class="value">Agrumes</div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🔬 Morphologie</h3>
+                    <ul class="characteristics-list">
+                        <li>Ailes noircies avec deux zones claires à la base</li>
+                        <li>Ailes antérieures avec une nervure principale ayant seulement deux setae dans la partie distale</li>
+                        <li>Aucune setae dans la partie centrale de la nervure principale</li>
+                        <li>Pattes foncées, sauf tarses et tibias des pattes antérieures jaunes</li>
+                        <li>Antennes formées de huit segments foncés</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>⚥ Dimorphisme sexuel</h3>
+                    <ul class="characteristics-list">
+                        <li>Zones de jonction des 3ème et 4ème articles antennaires transparentes</li>
+                        <li>Mâles avec le 6ème article antennaire anormalement long (environ deux fois plus long que chez la femelle)</li>
+                        <li>Mâles avec plus de 40 petites zones glandulaires dans les segments abdominaux</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🍊 Habitat et importance</h3>
+                    <ul class="characteristics-list">
+                        <li>Spécialisé sur les agrumes</li>
+                        <li>Ravageur important des plantations d\'agrumes</li>
+                        <li>Cause des déformations et décolorations sur les fruits</li>
+                        <li>Distribution principalement méditerranéenne</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(speciesId) {
+            document.getElementById(speciesId + '-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(speciesId) {
+            document.getElementById(speciesId + '-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+
+        // Fermer le modal avec la touche Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

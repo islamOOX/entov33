@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caelifera - Sous-ordre des Orthoptères</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c59 50%, #6b8e23 100%);
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb a {
+            color: #4a7c59;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: #2d5016;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #2d5016;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: #4a7c59;
+            font-weight: 300;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .header .description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 30px;
+            padding: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
+        }
+
+        .content-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .families-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .family-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-left: 6px solid #4a7c59;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .family-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.05) 0%, rgba(45, 80, 22, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .family-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            border-left-color: #2d5016;
+        }
+
+        .family-card:hover::before {
+            opacity: 1;
+        }
+
+        .family-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .family-card h3 {
+            color: #2d5016;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .family-card .scientific-name {
+            font-style: italic;
+            color: #4a7c59;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .species-count {
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        .family-description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .characteristics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .characteristic-item {
+            background: rgba(74, 124, 89, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #4a7c59;
+        }
+
+        .characteristic-item h4 {
+            color: #2d5016;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .characteristic-item p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #4a7c59 0%, #2d5016 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 124, 89, 0.4);
+        }
+
+        .sidebar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 30px;
+        }
+
+        .sidebar h2 {
+            color: #2d5016;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #4a7c59;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .info-section {
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4a7c59;
+        }
+
+        .info-section h3 {
+            color: #2d5016;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-section li {
+            padding: 5px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+
+        .info-section li::before {
+            content: "🔸";
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+
+        .back-button {
+            background: rgba(74, 124, 89, 0.1);
+            color: #2d5016;
+            border: 2px solid #4a7c59;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-button:hover {
+            background: #4a7c59;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 15px;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .family-card h3 {
+                font-size: 1.6rem;
+            }
+
+            .characteristics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="breadcrumb">
+            <a href="index.html">Orthoptères</a> > Caelifera
+        </div>
+        <h1>Caelifera</h1>
+        <p class="subtitle">Sous-ordre des Caelifères</p>
+        <p class="description">
+            Les Caelifères constituent un sous-ordre majeur des Orthoptères, comprenant les criquets et sauterelles 
+            à antennes courtes. Ils se distinguent par leurs adaptations morphologiques spécialisées pour le saut 
+            et leur système de communication acoustique unique.
+        </p>
+    </div>
+
+    <div class="main-container">
+        <div class="content-container">
+            <div class="families-grid">
+                <div class="family-card" onclick="navigateToFamily('acrididae')">
+                    <div class="family-header">
+                        <div>
+                            <h3>Acrididae</h3>
+                            <div class="scientific-name">Famille des Acrididés</div>
+                        </div>
+                        <div class="species-count">7 espèces</div>
+                    </div>
+                    
+                    <div class="family-description">
+                        La famille des Acrididae, communément appelée les "criquets vrais", représente la plus grande 
+                        famille d'Orthoptères avec plus de 10 000 espèces décrites. Ces insectes sont caractérisés 
+                        par leurs antennes filiformes courtes, leurs pattes postérieures puissantes adaptées au saut, 
+                        et leur capacité à produire des sons par frottement des pattes contre les ailes.
+                    </div>
+
+                    <div class="characteristics-grid">
+                        <div class="characteristic-item">
+                            <h4>🔬 Morphologie</h4>
+                            <p>Antennes courtes, tarses à 3 articles, ovipositeur court et robuste</p>
+                        </div>
+                        <div class="characteristic-item">
+                            <h4>🎵 Stridulation</h4>
+                            <p>Frottement des fémurs postérieurs contre les nervures des tegmina</p>
+                        </div>
+                        <div class="characteristic-item">
+                            <h4>🔄 Métamorphose</h4>
+                            <p>Développement hémimétabole avec 5-6 stades larvaires</p>
+                        </div>
+                        <div class="characteristic-item">
+                            <h4>🏠 Habitat</h4>
+                            <p>Milieux ouverts : prairies, steppes, zones cultivées</p>
+                        </div>
+                    </div>
+
+                    <button class="cta-button">Explorer les espèces →</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <a href="index.html" class="back-button">← Retour à l'accueil</a>
+            
+            <h2>Informations</h2>
+            
+            <div class="info-section">
+                <h3>📊 Diversité</h3>
+                <p>
+                    Le sous-ordre Caelifera comprend environ 11 000 espèces réparties 
+                    dans plusieurs familles, dont les Acrididae représentent la majorité.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>🌍 Distribution</h3>
+                <p>
+                    Les Caelifères sont présents sur tous les continents excepté l'Antarctique, 
+                    avec une diversité maximale dans les régions tropicales et subtropicales.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>🔬 Caractères diagnostiques</h3>
+                <ul>
+                    <li>Antennes filiformes courtes</li>
+                    <li>Tarses de 3 articles</li>
+                    <li>Organes auditifs sur l'abdomen</li>
+                    <li>Ovipositeur court et robuste</li>
+                    <li>Pattes postérieures sauteuses</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h3>🌱 Écologie</h3>
+                <p>
+                    La plupart des espèces sont phytophages et jouent un rôle important 
+                    dans les écosystèmes comme herbivores primaires et proies pour de 
+                    nombreux prédateurs.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>⚠️ Impact économique</h3>
+                <p>
+                    Certaines espèces peuvent causer des dommages importants aux cultures, 
+                    particulièrement lors de pullulations ou de migrations massives.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateToFamily(family) {
+            if (family === 'acrididae') {
+                window.location.href = 'acrididae.html';
+            }
+        }
+    </script>
+</body>
+</html>
+
